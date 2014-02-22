@@ -9,4 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "PubSub.h"
 
-PubSub(nicknameChanged, NSString)
+PubSub(nicknameChanged, NSString*)
+
+
+PubSub(testWithZeroArgs)

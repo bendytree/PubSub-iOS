@@ -23,12 +23,18 @@
     [self.window makeKeyAndVisible];
 
     keeper = [[NSObject alloc] init];
-    
+
     [Sub while:keeper nicknameChanged:^(NSString* newNickname) {
         NSLog(@"nickname changed to: %@", newNickname);
     }];
     
     [Pub nicknameChanged:@"A"];
+    
+    
+    [Sub while:keeper testWithZeroArgs:^{
+        NSLog(@"sub fired with zero args");
+    }];
+    [Pub testWithZeroArgs];
     
     [self performSelector:@selector(b) withObject:nil afterDelay:.1];
     [self performSelector:@selector(c) withObject:nil afterDelay:.15];
