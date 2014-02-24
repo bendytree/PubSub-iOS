@@ -34,6 +34,10 @@
     [Sub while:keeper testWithZeroArgs:^{
         NSLog(@"sub fired with zero args");
     }];
+    
+    [Pub testWithZeroArgs];
+    [Pub testWithZeroArgs];
+    [Pub testWithZeroArgs];
     [Pub testWithZeroArgs];
     
     [self performSelector:@selector(b) withObject:nil afterDelay:.1];

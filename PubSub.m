@@ -75,9 +75,16 @@
 + (void)forwardInvocation:(NSInvocation *)i
 {
     id arg = nil;
-    [i getArgument:&arg atIndex:2];
     
-    NSString* notificationName = [NSStringFromSelector(i.selector) componentsSeparatedByString:@":"][0];
+    NSString *selectorName = NSStringFromSelector(i.selector);
+    NSArray *selectorArgs = [selectorName componentsSeparatedByString:@":"];
+
+    NSString* notificationName = selectorArgs[0];
+    
+    if(selectorArgs.count > 1){
+        [i getArgument:&arg atIndex:2];
+    }
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:arg];
 }
 
