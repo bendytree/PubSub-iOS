@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		58ABB18418BBC79000A2F782 /* PubSub.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 58ABB18318BBC79000A2F782 /* PubSub.podspec */; };
 		BC23B537175E6CB800577890 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC23B536175E6CB800577890 /* UIKit.framework */; };
 		BC23B539175E6CB800577890 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC23B538175E6CB800577890 /* Foundation.framework */; };
 		BC23B53B175E6CB800577890 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC23B53A175E6CB800577890 /* CoreGraphics.framework */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		58ABB18318BBC79000A2F782 /* PubSub.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = PubSub.podspec; path = ../../PubSub.podspec; sourceTree = "<group>"; };
 		BC23B532175E6CB800577890 /* TestPubSub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestPubSub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC23B536175E6CB800577890 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BC23B538175E6CB800577890 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -51,6 +53,7 @@
 		BC23B527175E6CB800577890 = {
 			isa = PBXGroup;
 			children = (
+				58ABB18318BBC79000A2F782 /* PubSub.podspec */,
 				BC23B562175EB67200577890 /* readme.md */,
 				BC23B53C175E6CB800577890 /* TestPubSub */,
 				BC23B535175E6CB800577890 /* Frameworks */,
@@ -159,6 +162,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58ABB18418BBC79000A2F782 /* PubSub.podspec in Resources */,
 				BC23B541175E6CB800577890 /* InfoPlist.strings in Resources */,
 				BC23B563175EB67200577890 /* readme.md in Resources */,
 			);
@@ -281,6 +285,7 @@
 				BC23B552175E6CB800577890 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
