@@ -42,14 +42,23 @@ in all your classes. You can skip this step if you want to do it differently.
 
 In `Notifications.h` you will use a preprocessor statement to declare your notifications. Declare one per line. For example:
 
-    PubSub(nameChanged, NSString)
-    
+    PubSub(somethingHappened) // zero arguments
+
+    PubSub(nameChanged, NSString*) // one arguments
+
+    /*
+    NOT supported yet (but would be cool)
+    PubSub(multipleArgsCommand, NSString*, BOOL, NSString*) // multiple arguments...
+    */
+
 This generates two strongly typed methods that look kinda like this:
 
     @interface Pub
+    + (void) somethingHappened;
     + (void) nameChanged:(NSString*)arg;
     @end
     @interface Sub
+    + (void) while:(id)obj somethingHappened:(void(^)(void))callback;
     + (void) while:(id)obj nameChanged:(void(^)(NSString*))callback;
     @end
 
