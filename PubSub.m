@@ -25,8 +25,6 @@
         signature = [self methodSignatureForSelector:@selector(mockSubscribeWhile:callback:)];
     }
     return signature;
-    
-    return nil;
 }
 
 + (void) forwardInvocation:(NSInvocation *)anInvocation
