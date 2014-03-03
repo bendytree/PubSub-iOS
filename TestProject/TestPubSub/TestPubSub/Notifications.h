@@ -9,7 +9,15 @@
 #import <Foundation/Foundation.h>
 #import "PubSub.h"
 
-PubSub(nicknameChanged, NSString*)
 
+PubSub0Arg(testWithZeroArgs)
 
-PubSub(testWithZeroArgs)
+PubSub1Arg(testWithOneArg, \
+       NSString*, a)
+
+PubSub2Arg(testWithTwoArgs, \
+       NSString*, a, \
+       NSString*, b)
+
+PubSub3Arg(testWithThreeArgs, NSString*, a, NSString*, b, NSString *, c)
+

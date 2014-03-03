@@ -34,8 +34,14 @@
     __unsafe_unretained id keepAlive = nil;
     [anInvocation getArgument:&keepAlive atIndex:2];
     
-    void(^callback)(id arg) = nil;
-    [anInvocation getArgument:&callback atIndex:3];
+    void(^callbackZero)(void) = nil;
+    void(^callbackOne)(id arg1) = nil;
+    void(^callbackTwo)(id arg1, id arg2) = nil;
+    void(^callbackThree)(id arg1, id arg2, id arg3) = nil;
+    [anInvocation getArgument:&callbackZero atIndex:3];
+    [anInvocation getArgument:&callbackOne atIndex:3];
+    [anInvocation getArgument:&callbackTwo atIndex:3];
+    [anInvocation getArgument:&callbackThree atIndex:3];
     
     NSString* notificationName = [NSStringFromSelector(aSelector) componentsSeparatedByString:@":"][1];
     
@@ -48,7 +54,26 @@
             return;
         }
         
-        callback(notification.object);
+        if(notification.userInfo.count == 0){
+            callbackZero();
+            return;
+        }
+        
+        if(notification.userInfo.count == 1){
+            callbackOne(notification.userInfo[@"0"]);
+            return;
+        }
+        
+        if(notification.userInfo.count == 2){
+            callbackTwo(notification.userInfo[@"0"], notification.userInfo[@"1"]);
+            return;
+        }
+        
+        if(notification.userInfo.count == 3){
+            callbackThree(notification.userInfo[@"0"], notification.userInfo[@"1"], notification.userInfo[@"2"]);
+            return;
+        }
+        
     }];
 }
 
@@ -58,32 +83,52 @@
 
 @implementation Pub
 
-+ (void) mockPublish:(id)arg { }
++ (void) mockPublishZero { }
++ (void) mockPublishOne:(id)arg1 { }
++ (void) mockPublishTwo:(id)arg1 :(id)arg2 { }
++ (void) mockPublishThree:(id)arg1 :(id)arg2 :(id)arg3 { }
 
 + (NSMethodSignature *) methodSignatureForSelector:(SEL)selector
 {
+
     NSMethodSignature* signature = [super methodSignatureForSelector:selector];
     if (!signature)
     {
-        signature = [self methodSignatureForSelector:@selector(mockPublish:)];
+        NSString *selectorName = NSStringFromSelector(selector);
+        NSArray *selectorArgs = [selectorName componentsSeparatedByString:@":"];
+        int argCount = selectorArgs.count - 1;
+        if(argCount == 0) {
+            signature = [self methodSignatureForSelector:@selector(mockPublishZero)];
+        } else if(argCount == 1) {
+            signature = [self methodSignatureForSelector:@selector(mockPublishOne:)];
+        } else if(argCount == 2) {
+            signature = [self methodSignatureForSelector:@selector(mockPublishTwo::)];
+        } else if(argCount == 3) {
+            signature = [self methodSignatureForSelector:@selector(mockPublishThree:::)];
+        }
     }
     return signature;
 }
 
-+ (void)forwardInvocation:(NSInvocation *)i
++ (void)forwardInvocation:(NSInvocation *)anInvocation
 {
-    id arg = nil;
     
-    NSString *selectorName = NSStringFromSelector(i.selector);
+    NSString *selectorName = NSStringFromSelector(anInvocation.selector);
     NSArray *selectorArgs = [selectorName componentsSeparatedByString:@":"];
 
     NSString* notificationName = selectorArgs[0];
     
-    if(selectorArgs.count > 1){
-        [i getArgument:&arg atIndex:2];
+    NSMutableDictionary *argsDict = [NSMutableDictionary new];
+    
+    for (NSUInteger i = 0; i < (selectorArgs.count-1); i++) {
+        id arg = nil;
+        NSInteger paramIndex = i+2;
+        [anInvocation getArgument:&arg atIndex:paramIndex];
+        
+        [argsDict setObject:arg forKey:[[NSNumber numberWithInt:i] stringValue]];
     }
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:arg];
+    [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:nil userInfo:argsDict];
 }
 
 @end

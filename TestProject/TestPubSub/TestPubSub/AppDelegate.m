@@ -23,46 +23,53 @@
     [self.window makeKeyAndVisible];
 
     keeper = [[NSObject alloc] init];
-
-    [Sub while:keeper nicknameChanged:^(NSString* newNickname) {
-        NSLog(@"nickname changed to: %@", newNickname);
-    }];
-    
-    [Pub nicknameChanged:@"A"];
     
     
+    //
+    // Zero arg subscription
+    //
     [Sub while:keeper testWithZeroArgs:^{
-        NSLog(@"sub fired with zero args");
+        NSLog(@"Zero args...");
     }];
     
     [Pub testWithZeroArgs];
     [Pub testWithZeroArgs];
     [Pub testWithZeroArgs];
     [Pub testWithZeroArgs];
+
+    //
+    // One arg subscription
+    //
+    [Sub while:keeper testWithOneArg:^(NSString *a) {
+        NSLog(@"One arg: %@", a);
+    }];
     
-    [self performSelector:@selector(b) withObject:nil afterDelay:.1];
-    [self performSelector:@selector(c) withObject:nil afterDelay:.15];
-    [self performSelector:@selector(d) withObject:nil afterDelay:.2];
+    [Pub testWithOneArg:@"A"];
     
+    
+    //
+    // Two arg subscription
+    //
+    [Sub while:keeper testWithTwoArgs:^(NSString *a, NSString *b) {
+        NSLog(@"Two args: a: %@, b: %@", a, b);
+    }];
+    [Pub testWithTwoArgs:@"a" b:@"B"];
+    [Pub testWithTwoArgs:@"A" b:@"b"];
+    [Pub testWithTwoArgs:@"aaa" b:@"bbb"];
+    
+    //
+    // Three arg subscription
+    //
+    [Sub while:keeper testWithThreeArgs:^(NSString *a, NSString *b, NSString *c) {
+        NSLog(@"Three args: a: %@, b: %@, c: %@", a, b, c);
+    }];
+    [Pub testWithThreeArgs:@"a" b:@"b" c:@"c"];
+    [Pub testWithThreeArgs:@"a" b:@"b" c:@"c"];
+    [Pub testWithThreeArgs:@"a" b:@"b" c:@"c"];
+    [Pub testWithThreeArgs:@"a" b:@"b" c:@"c"];
+    [Pub testWithThreeArgs:@"a" b:@"b" c:@"c"];
+
     return YES;
-}
-
-- (void) b
-{
-    NSLog(@"publishing b");
-    [Pub nicknameChanged:@"B"];
-}
-
-- (void) c
-{
-    NSLog(@"keeper = nil");
-    keeper = nil;
-}
-
-- (void) d
-{
-    NSLog(@"publishing d");
-    [Pub nicknameChanged:@"D"];
 }
 
 @end
