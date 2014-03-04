@@ -24,7 +24,6 @@
 
     keeper = [[NSObject alloc] init];
     
-    
     //
     // Zero arg subscription
     //

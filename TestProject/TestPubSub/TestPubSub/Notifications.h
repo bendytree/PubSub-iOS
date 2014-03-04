@@ -10,14 +10,19 @@
 #import "PubSub.h"
 
 
-PubSub0Arg(testWithZeroArgs)
+PubSub0(testWithZeroArgs)
 
-PubSub1Arg(testWithOneArg, \
-       NSString*, a)
+PubSub1(testWithOneArg, \
+        NSString*, a)
 
-PubSub2Arg(testWithTwoArgs, \
-       NSString*, a, \
-       NSString*, b)
+PubSub2(testWithTwoArgs, \
+        NSString*, a, \
+        NSString*, b)
 
-PubSub3Arg(testWithThreeArgs, NSString*, a, NSString*, b, NSString *, c)
+PubSub3(testWithThreeArgs, \
+        NSString*, a, \
+        NSString*, b, \
+        NSString*, c)
+
+
 
