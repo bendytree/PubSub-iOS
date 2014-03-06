@@ -67,8 +67,32 @@
     [Pub testWithThreeArgs:@"a" b:@"b" c:@"c"];
     [Pub testWithThreeArgs:@"a" b:@"b" c:@"c"];
     [Pub testWithThreeArgs:@"a" b:@"b" c:@"c"];
+    
+    
+    [self testEventWithNilArguments];
 
     return YES;
+}
+
+
+- (void) testEventWithNilArguments {
+    [Sub while:self testWith1NilArguments:^(NSString *a) {
+        NSParameterAssert(a == nil);
+    }];
+    [Pub testWith1NilArguments:nil];
+    
+    [Sub while:self testWith2NilArguments:^(NSString *a, NSString *b) {
+        NSParameterAssert(a == nil);
+        NSParameterAssert(b == nil);
+    }];
+    [Pub testWith2NilArguments:nil b:nil];
+    
+    [Sub while:self testWith3NilArguments:^(NSString *a, NSString *b, NSString *c) {
+        NSParameterAssert(a == nil);
+        NSParameterAssert(b == nil);
+        NSParameterAssert(c == nil);
+    }];
+    [Pub testWith3NilArguments:nil b:nil c:nil];
 }
 
 @end

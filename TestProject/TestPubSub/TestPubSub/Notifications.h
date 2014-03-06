@@ -26,3 +26,14 @@ PubSub3(testWithThreeArgs, \
 
 
 
+PubSub1(testWith1NilArguments, \
+        NSString*, a)
+
+PubSub2(testWith2NilArguments, \
+        NSString*, a, \
+        NSString*, b)
+
+PubSub3(testWith3NilArguments, \
+        NSString*, a, \
+        NSString*, b, \
+        NSString*, c)

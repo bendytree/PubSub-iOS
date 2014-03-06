@@ -59,18 +59,27 @@
             return;
         }
         
+        __block id (^getArgAtIndex)(NSString *) = ^id(NSString *index) {
+            id result = notification.userInfo[index];
+            if(result == [NSNull null]){
+                return nil;
+            }
+            return result;
+        };
+        
+        
         if(notification.userInfo.count == 1){
-            callbackOne(notification.userInfo[@"0"]);
+            callbackOne(getArgAtIndex(@"0"));
             return;
         }
         
         if(notification.userInfo.count == 2){
-            callbackTwo(notification.userInfo[@"0"], notification.userInfo[@"1"]);
+            callbackTwo(getArgAtIndex(@"0"), getArgAtIndex(@"1"));
             return;
         }
         
         if(notification.userInfo.count == 3){
-            callbackThree(notification.userInfo[@"0"], notification.userInfo[@"1"], notification.userInfo[@"2"]);
+            callbackThree(getArgAtIndex(@"0"), getArgAtIndex(@"1"), getArgAtIndex(@"2"));
             return;
         }
         
@@ -124,6 +133,10 @@
         id arg = nil;
         NSInteger paramIndex = i+2;
         [anInvocation getArgument:&arg atIndex:paramIndex];
+        
+        if(arg == nil){
+            arg = [NSNull null];
+        }
         
         [argsDict setObject:arg forKey:[[NSNumber numberWithInt:i] stringValue]];
     }
