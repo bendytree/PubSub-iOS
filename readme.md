@@ -1,6 +1,5 @@
 
 
-
 ## PubSub-iOS
 
 PubSub-iOS is a very simple, block based wrapper around `NSNotificationCenter`.
@@ -10,7 +9,7 @@ The goal is minimal syntax, strong typing, and automatic unregistering.
 Here's what it looks like:
 
     // Declare your notification
-    PubSub1(nameChanged, NSString *name)
+    PubSub1(nameChanged, NSString*, name)
 
     // Subscribe
     [Sub while:self nameChanged:^(NSString *name){
