@@ -1,4 +1,8 @@
 
+_NOTE: this project is a fork of [bendytree/PubSub-iOS](https://github.com/bendytree/PubSub-iOS) and has changed significantly from it's original source. I'd like to say thanks to *bendytree* for the idea and the kick-start of a project._
+
+
+
 ## PubSub-iOS
 
 PubSub-iOS is a very simple, block based wrapper around `NSNotificationCenter`.
