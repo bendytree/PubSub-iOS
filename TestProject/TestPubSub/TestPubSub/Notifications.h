@@ -37,3 +37,7 @@ PubSub3(testWith3NilArguments, \
         NSString*, a, \
         NSString*, b, \
         NSString*, c)
+
+
+// TODO: find a way to support this scenario
+// PubSub1(testWithAnInt, int, a)

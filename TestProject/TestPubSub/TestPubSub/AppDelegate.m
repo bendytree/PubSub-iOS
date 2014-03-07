@@ -70,6 +70,7 @@
     
     
     [self testEventWithNilArguments];
+    [self testWithAnInt];
 
     return YES;
 }
@@ -93,6 +94,14 @@
         NSParameterAssert(c == nil);
     }];
     [Pub testWith3NilArguments:nil b:nil c:nil];
+}
+
+- (void) testWithAnInt {
+// TODO: find a way to support this scenario
+//    [Sub while:self testWithAnInt:^(int a) {
+//        NSParameterAssert(a == 7);
+//    }];
+//    [Pub testWithAnInt:7];
 }
 
 @end
