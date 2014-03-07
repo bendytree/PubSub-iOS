@@ -1,5 +1,4 @@
 
-
 ## PubSub-iOS
 
 PubSub-iOS is a very simple, block based wrapper around `NSNotificationCenter`.
@@ -127,3 +126,7 @@ unsubscribed. No cleanup necessary.
 Compare that to `NSNotificationCenter` where you have to retain an observer then you have
 to explicitly unregister when you're done.
 
+
+# WARNING:
+
+You can't use value types such as `int`, `BOOL`, etc in the PubSub macro... _If someone could help me figure out a way to acomplish this (possibly through some macro tricks) I'd love the feedback!_
