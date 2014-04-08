@@ -1,5 +1,7 @@
-
 _NOTE: this project is a fork of [bendytree/PubSub-iOS](https://github.com/bendytree/PubSub-iOS) and has changed significantly from it's original source. I'd like to say thanks to *bendytree* for the idea and the kick-start of a project._
+
+# WARNING:
+I love the concept of this project and the simplicity of declaring, consuming and publishing of notifications it provides. However, I've recently pulled it out of a project I was using due to a number of random crashes - if anyone more Objective-C versed than I could have a look I'd love some feedback. But for now - BEWARE :P
 
 
 
