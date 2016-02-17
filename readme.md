@@ -34,7 +34,7 @@ This library has no dependencies and requires arc.
 
 #### Option 1 (Copy 3 files)
 
-Copy `PubSub.h`, `PubSub.m`, and `Notifications.h` into your XCode project. The PubSub files
+Copy `PubSub.h`, `PubSub.m`, and `Notifications.h` into your Xcode project. The PubSub files
 do all the work and `Notifications.h` is where you declare your notifications.
 
 If your project doesn't have ARC enabled, add the `-fobjc-arc` flag for `PubSub.m`.
