@@ -24,35 +24,84 @@
 
     keeper = [[NSObject alloc] init];
     
-    [Sub while:keeper nicknameChanged:^(NSString* newNickname) {
-        NSLog(@"nickname changed to: %@", newNickname);
+    //
+    // Zero arg subscription
+    //
+    [Sub while:keeper testWithZeroArgs:^{
+        NSLog(@"Zero args...");
     }];
     
-    [Pub nicknameChanged:@"A"];
+    [Pub testWithZeroArgs];
+    [Pub testWithZeroArgs];
+    [Pub testWithZeroArgs];
+    [Pub testWithZeroArgs];
+
+    //
+    // One arg subscription
+    //
+    [Sub while:keeper testWithOneArg:^(NSString *a) {
+        NSLog(@"One arg: %@", a);
+    }];
     
-    [self performSelector:@selector(b) withObject:nil afterDelay:.1];
-    [self performSelector:@selector(c) withObject:nil afterDelay:.15];
-    [self performSelector:@selector(d) withObject:nil afterDelay:.2];
+    [Pub testWithOneArg:@"A"];
     
+    
+    //
+    // Two arg subscription
+    //
+    [Sub while:keeper testWithTwoArgs:^(NSString *a, NSString *b) {
+        NSLog(@"Two args: a: %@, b: %@", a, b);
+    }];
+    [Pub testWithTwoArgs:@"a" b:@"B"];
+    [Pub testWithTwoArgs:@"A" b:@"b"];
+    [Pub testWithTwoArgs:@"aaa" b:@"bbb"];
+    
+    //
+    // Three arg subscription
+    //
+    [Sub while:keeper testWithThreeArgs:^(NSString *a, NSString *b, NSString *c) {
+        NSLog(@"Three args: a: %@, b: %@, c: %@", a, b, c);
+    }];
+    [Pub testWithThreeArgs:@"a" b:@"b" c:@"c"];
+    [Pub testWithThreeArgs:@"a" b:@"b" c:@"c"];
+    [Pub testWithThreeArgs:@"a" b:@"b" c:@"c"];
+    [Pub testWithThreeArgs:@"a" b:@"b" c:@"c"];
+    [Pub testWithThreeArgs:@"a" b:@"b" c:@"c"];
+    
+    
+    [self testEventWithNilArguments];
+    [self testWithAnInt];
+
     return YES;
 }
 
-- (void) b
-{
-    NSLog(@"publishing b");
-    [Pub nicknameChanged:@"B"];
+
+- (void) testEventWithNilArguments {
+    [Sub while:self testWith1NilArguments:^(NSString *a) {
+        NSParameterAssert(a == nil);
+    }];
+    [Pub testWith1NilArguments:nil];
+    
+    [Sub while:self testWith2NilArguments:^(NSString *a, NSString *b) {
+        NSParameterAssert(a == nil);
+        NSParameterAssert(b == nil);
+    }];
+    [Pub testWith2NilArguments:nil b:nil];
+    
+    [Sub while:self testWith3NilArguments:^(NSString *a, NSString *b, NSString *c) {
+        NSParameterAssert(a == nil);
+        NSParameterAssert(b == nil);
+        NSParameterAssert(c == nil);
+    }];
+    [Pub testWith3NilArguments:nil b:nil c:nil];
 }
 
-- (void) c
-{
-    NSLog(@"keeper = nil");
-    keeper = nil;
-}
-
-- (void) d
-{
-    NSLog(@"publishing d");
-    [Pub nicknameChanged:@"D"];
+- (void) testWithAnInt {
+// TODO: find a way to support this scenario
+//    [Sub while:self testWithAnInt:^(int a) {
+//        NSParameterAssert(a == 7);
+//    }];
+//    [Pub testWithAnInt:7];
 }
 
 @end
